@@ -195,7 +195,7 @@ function reloadModel(velocity, deltax, resistance_c, elasticity_c, mass, radius)
     var my_object1 = new MyObject('object1', [deltax, 0], [velocity, 0], mass, radius);
     objects.push(my_object1);
 
-    spring = new Spring('spring', 0, radius / 2);
+    spring = new Spring('spring', radius / 2, radius / 2);
 
     makeCharts(velocity, deltax, resistance_c, elasticity_c, mass);
 }
