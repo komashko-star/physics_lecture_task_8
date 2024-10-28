@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Моделирование</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="text/javascript" src="MyObject.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+      <div id="header">
+        <h1 id="header_text">Моделирование пружинного маятника</h1>
+      </div>
+
+
+      <div id="body1">
+      <div id="form">
+        <form id="collisionForm">
+          Масса тела: <br/>
+
+          <label for="mass">m</label> = <input type="number" step="0.01" value="1" id="mass" required> кг <br/>
+          
+          Отклонение от начального положения: <br/>
+
+          <label for="deltax">Δx</label> = <input type="number" step="0.001" value="0" id="deltax" required> м <br/>
+          
+          Коэффициент сопротивления среде: <br/>
+
+          <label for="resistance_c">k</label> = <input type="number" step="0.001" value="0" id="resistance_c" required> Нс/м <br/>
+                    
+          Коэффициент упругости пружины: <br/>
+
+          <label for="elasticity_c">k</label> = <input type="number" step="0.001" value="0" id="elasticity_c" required> Н/м <br/>
+          
+          Скорость тела: <br/>
+
+          <label for="velocity">v</label> = <input type="number" step="0.001" value="10" id="velocity" required> м/с <br/>
+          
+          <br/><button type="submit">Перезапустить симуляцию</button><br/>
+        </form>
+
+        <input type="checkbox" id="stop_simulation"> Остановить симуляцию?<br/>
+
+        <button type="button" id="next_step_simulation">Следующий шаг</button>
+    </div>
+    <div id="border">
+        <div id="object1"> </div> 
+    </div>
+
+    <div id="chart_div">
+      <canvas id="energy_chart" style="width:100%;max-width:600px"></canvas>
+      <canvas id="x_chart" style="width:100%;max-width:600px"></canvas>
+    </div>
+
+    </div>
+
+    <div id="footer_div">
+      <p>Исходный код: <a href="https://github.com/komashko-star/physics_lecture_task_8">https://github.com/komashko-star/physics_lecture_task_8</a></p>
+    </div>
+
+  </body>
+</html>
