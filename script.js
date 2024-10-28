@@ -9,6 +9,7 @@ var border = null;
 objects = []
 var x_chart = null;
 var energy_chart = null;
+var spring = null;
 
 function polarToRect(a, phi) {
   return [a * Math.cos(phi), a * Math.sin(phi)];
@@ -51,6 +52,32 @@ class Border {
     this.height = this.width / (this.x_domain - this.x_domain_start) * (this.y_domain - this.y_domain_start);
     this.DOMObject.style.height = Math.round(this.height) + 'px';
     this.DOMObject.style.width = Math.round(this.width) + 'px';
+  }
+}
+
+class Spring {
+  constructor(id, start_x, width){
+    this.id = id;
+    this.DOMObject = document.getElementById(this.id);
+
+    this.start_x = start_x;
+    this.width = width;
+
+    this.updateView(0);
+  }
+  getDOMObject(){
+    this.DOMObject = document.getElementById(this.id);
+    return this.DOMObject;
+  }
+
+  updateView(new_x) {
+    let center_x = Math.min(this.start_x, new_x);
+      
+    this.DOMObject.style.top = (-this.width / 2 - border.y_domain_start) / (border.y_domain - border.y_domain_start) * border.height + 'px';
+    this.DOMObject.style.left = (center_x - border.x_domain_start) / (border.x_domain - border.x_domain_start) * border.width + 'px';
+
+    this.DOMObject.style.height = (this.width) / (border.y_domain - border.y_domain_start) * border.height + 'px';
+    this.DOMObject.style.width = Math.abs(this.start_x - new_x) / (border.x_domain - border.x_domain_start) * border.width + 'px';
   }
 }
 
@@ -163,10 +190,12 @@ function reloadModel(velocity, deltax, resistance_c, elasticity_c, mass, radius)
     counter = 1;
     objects = [];
     border = new Border('border', resistance_c, elasticity_c);
-    border.getDOMObject().innerHTML = "<div id=\"object1\"> </div>";
+    border.getDOMObject().innerHTML = "<div id=\"object1\"> </div><div id=\"spring\"> </div>";
     
     var my_object1 = new MyObject('object1', [deltax, 0], [velocity, 0], mass, radius);
     objects.push(my_object1);
+
+    spring = new Spring('spring', 0, radius / 2);
 
     makeCharts(velocity, deltax, resistance_c, elasticity_c, mass);
 }

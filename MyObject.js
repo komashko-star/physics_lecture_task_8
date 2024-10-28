@@ -51,6 +51,10 @@ class MyObject {
     
         this.DOMObject.style.height = this.height / (border.y_domain - border.y_domain_start) * border.height + 'px';
         this.DOMObject.style.width = this.width / (border.x_domain - border.x_domain_start) * border.width + 'px';
+
+        if (spring != null) {
+            spring.updateView(x + this.width / 2);
+        }
   
     }
     getNewPosition() {
